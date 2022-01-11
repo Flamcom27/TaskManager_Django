@@ -1,0 +1,11 @@
+{% extends 'index.html' %}
+{% block content %}
+<Title>AddTask</Title>
+{% endblock %}
+{% block body %}
+    <form action="{% url 'add_task' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">add</button>
+    </form>
+{% endblock %}
