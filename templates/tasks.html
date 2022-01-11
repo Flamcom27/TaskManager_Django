@@ -1,0 +1,26 @@
+{% extends 'index.html' %}
+{% block content %}
+    <Title>Tasks</Title>
+{% endblock %}
+{% block body %}
+<h2>Task list</h2>
+
+<table>
+  <tr>
+    <th>Task</th>
+    <th>Description</th>
+    <th>Created</th>
+    <th>Deadline</th>
+    <th>done</th>
+  </tr>
+<tr>
+    {% for task in tasks %}
+        <th>{{ task.title }}</th>
+        <th>{{ task.description }}</th>
+        <th>{{ task.created }}</th>
+        <th>{{ task.deadline }}</th>
+        <th>{{ task.done }}</th>
+    {% endfor %}
+</tr>
+</table>
+{% endblock %}
