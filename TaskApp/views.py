@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import TaskModel
 from .forms import TaskForm
-
+from bootstrap_datepicker_plus.widgets import DatePickerInput
 
 # Create your views here.
 
@@ -17,8 +17,14 @@ def task_view(request):
 def add_task_view(request):
     if request.method == 'POST':
         form = TaskForm(request.POST)
+        form.fields['deadline'].widget = DatePickerInput()
         if form.is_valid():
-            print(form.cleaned_data)
+            try:
+                TaskModel.objects.create(**form.cleaned_data)
+                return redirect('tasks')
+            except:
+                form.add_error(None, 'incorrect data')
+
     else:
         form = TaskForm()
     return render(request, 'addTask.html', {'form': form})
