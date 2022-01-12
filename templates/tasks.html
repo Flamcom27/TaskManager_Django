@@ -6,20 +6,30 @@
 <h2>Task list</h2>
 
 <table>
-  <tr>
-    <th>Task</th>
-    <th>Description</th>
-    <th>Created</th>
-    <th>Deadline</th>
-    <th>done</th>
-  </tr>
+    <tr>
+        <th>Task</th>
+        <th>Description</th>
+        <th>Created</th>
+        <th>Deadline</th>
+        <th>Done</th>
+        <th>Options</th>
+    </tr>
 {% for task in tasks %}
 <tr>
-        <th>{{ task.title }}</th>
-        <th>{{ task.description }}</th>
-        <th>{{ task.created }}</th>
-        <th>{{ task.deadline }}</th>
-        <th>{{ task.done }}</th>
+    <th>{{ task.title }}</th>
+    <th>{{ task.description }}</th>
+    <th>{{ task.created }}</th>
+    <th>{{ task.deadline }}</th>
+    <th>{{ task.done }}</th>
+    <form action="{% url 'delete_task' %}" method="post">
+    {% csrf_token %}
+        <label for="{{ task.id }}">
+            <th>
+                <input type="hidden" name="id" value="{{ task.id }}">
+                <input type="submit" value="Delete">
+            </th>
+        </label>
+    </form>
 </tr>
 {% endfor %}
 </table>

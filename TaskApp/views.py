@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import TaskModel
 from .forms import TaskForm
 
+
 # Create your views here.
 
 def home_view(request):
@@ -17,12 +18,13 @@ def add_task_view(request):
     if request.method == 'POST':
         form = TaskForm(request.POST)
         if form.is_valid():
-            try:
-                TaskModel.objects.create(**form.cleaned_data)
-                return redirect('tasks')
-            except:
-                form.add_error(None, 'incorrect data')
-
+            TaskModel.objects.create(**form.cleaned_data)
+            return redirect('tasks')
     else:
         form = TaskForm()
     return render(request, 'addTask.html', {'form': form})
+
+
+def delete_task_view(request):
+    TaskModel.objects.get(id=request.POST['id']).delete()
+    return redirect('tasks')
