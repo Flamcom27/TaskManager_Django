@@ -28,3 +28,15 @@ def add_task_view(request):
 def delete_task_view(request):
     TaskModel.objects.get(id=request.POST['id']).delete()
     return redirect('tasks')
+
+
+def edit_task_view(request, pk):
+    task = TaskModel.objects.get(id=pk)
+    form = TaskForm(instance=task)
+    if request.method == 'POST':
+        form = TaskForm(request.POST, instance=task)
+        if form.is_valid():
+            form.save()
+            return redirect('tasks')
+    context = {'form': form}
+    return render(request, 'addTask.html', context)

@@ -3,7 +3,7 @@
 <Title>AddTask</Title>
 {% endblock %}
 {% block body %}
-    <form action="{% url 'add_task' %}" method="post">
+    <form action="" method="post">
         {% csrf_token %}
         {% for f in form %}
         <p><label for="{{ f.id_for_label }}">{{ f.label }}</label>{{ f }}</p>

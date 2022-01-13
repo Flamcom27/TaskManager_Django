@@ -13,9 +13,3 @@ class TaskForm(forms.ModelForm):
         widgets = {
             'deadline': DateInput()
         }
-
-
-# class DeleteTaskForm(forms.ModelForm):
-#     class Meta:
-#         model = TaskModel
-#         fields = '__all__'

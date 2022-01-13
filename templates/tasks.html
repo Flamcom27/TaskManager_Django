@@ -21,15 +21,22 @@
     <th>{{ task.created }}</th>
     <th>{{ task.deadline }}</th>
     <th>{{ task.done }}</th>
+    <th>
     <form action="{% url 'delete_task' %}" method="post">
     {% csrf_token %}
         <label for="{{ task.id }}">
-            <th>
+
                 <input type="hidden" name="id" value="{{ task.id }}">
-                <input type="submit" value="Delete">
-            </th>
+                <input type="submit" value="Delete"><br>
+
         </label>
     </form>
+        <form action="{% url 'edit_task' task.id %}">
+            <label for="{{ task }}">
+                    <input type="submit" value="Edit">
+            </label>
+        </form>
+    </th>
 </tr>
 {% endfor %}
 </table>
